@@ -1,0 +1,12 @@
+env:
+  es6: true # also changes default ecmaVersion to 6
+  jasmine: true
+
+globals:
+  Chart: true
+
+# https://eslint.org/docs/rules/
+rules:
+  # Best Practices
+  complexity: 0
+  max-statements: 0

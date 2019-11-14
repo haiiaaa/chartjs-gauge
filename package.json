@@ -1,0 +1,54 @@
+{
+  "name": "chartjs-gauge",
+  "description": "Gauge chart for chart.js",
+  "homepage": "https://github.com/haiiaaa/chartjs-gauge/",
+  "version": "0.1.0",
+  "licence": "MIT",
+  "jsdelivr": "dist/chartjs-gauge.min.js",
+  "unpkg": "dist/chartjs-gauge.min.js",
+  "main": "dist/chartjs-gauge.js",
+  "keywords": [
+    "chartjs",
+    "chart.js",
+    "chart",
+    "charts",
+    "gauge"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/haiiaaa/chartjs-gauge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/haiiaaa/chartjs-gauge/issues"
+  },
+  "dependencies": {
+    "chart.js": "^2.8.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "karma": "^4.4.1",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-firefox-launcher": "^1.2.0",
+    "karma-jasmine": "^2.0.1",
+    "karma-jasmine-html-reporter": "^1.4.2",
+    "karma-rollup-preprocessor": "^7.0.2",
+    "rollup": "^1.25.1",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-istanbul": "^2.0.1",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^5.1.2"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "build:watch": "rollup -c --watch",
+    "lint": "eslint **/*.js",
+    "test": "karma start karma.conf.js",
+    "test:html": "karma start Astrada.Web/karma.conf.js --reporters kjhtml --browsers Chrome",
+    "clone-chartjs": "git clone --branch v2.8.0 --depth 1 https://github.com/chartjs/Chart.js.git modules/chart.js"
+  }
+}

@@ -1,0 +1,10 @@
+<svg width="160" height="160" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+<title>chartjs-gauge</title>
+<g fill="none" fill-rule="evenodd">
+<path d="m63.108 59.281a92.818 98.047 0 0 1 61.729 11.791l-46.409 84.911z" fill="#36a2eb" stroke-width="1.2403"/>
+<path d="m123.46 70.157-45.031 85.825 64.963-40.843v-30.244a95.292 97.384 0 0 0-19.932-14.738zm35.523 33.818v1.3618l0.60742-0.38251a95.292 97.384 0 0 0-0.60742-0.97924z" fill="#ffce56" stroke-width="1.2525"/>
+<path d="m71.283 58.208a95.292 98.051 0 0 0-54.334 23.02v38.818l61.479 35.936z" fill="#fe6184" fill-opacity=".8" stroke-width="1.2568"/>
+<path d="m73 150 L87 60 L85 150 z" fill="#000000" fill-opacity=".66667" stroke-width="1.5178"/>
+<path d="m80 6 64.086 37v74l-64.086 37-64.086-37v-74z" fill="none" stroke="#e7e9ed" stroke-width="8"/>
+</g>
+</svg>
