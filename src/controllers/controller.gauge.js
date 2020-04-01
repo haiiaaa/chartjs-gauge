@@ -53,6 +53,14 @@ const GaugeController = Chart.controllers.doughnut.extend({
   getWidth(chart) {
     return chart.chartArea.right - chart.chartArea.left;
   },
+  getTranslation(chart) {
+    const { chartArea, offsetX, offsetY } = chart;
+    const centerX = (chartArea.left + chartArea.right) / 2;
+    const centerY = (chartArea.top + chartArea.bottom) / 2;
+    const dx = (centerX + offsetX);
+    const dy = (centerY + offsetY);
+    return { dx, dy };
+  },
   getAngle({ chart, value, maxValue }) {
     const { rotation, circumference } = chart.options;
     return rotation + (circumference * (value / maxValue));
@@ -72,7 +80,12 @@ const GaugeController = Chart.controllers.doughnut.extend({
     if (!this.chart.animating) { // triggered when hovering
       ease = 1;
     }
-    const { ctx, chartArea: { bottom }, config } = this.chart;
+    const {
+      ctx,
+      config,
+      innerRadius,
+      outerRadius,
+    } = this.chart;
     const dataset = config.data.datasets[this.index];
     const { previous } = this.getMeta();
     const {
@@ -82,14 +95,13 @@ const GaugeController = Chart.controllers.doughnut.extend({
       color,
     } = config.options.needle;
 
-    const { innerRadius, outerRadius } = this.chart;
     const width = this.getWidth(this.chart);
     const needleRadius = (radiusPercentage / 100) * width;
     const needleWidth = (widthPercentage / 100) * width;
     const needleLength = (lengthPercentage / 100) * (outerRadius - innerRadius) + innerRadius;
 
-    const dx = this.getWidth(this.chart) / 2;
-    const dy = bottom;
+    // center
+    const { dx, dy } = this.getTranslation(this.chart);
 
     // interpolate
     const origin = this.getAngle({ chart: this.chart, value: previous.value, maxValue: previous.maxValue });
@@ -121,7 +133,7 @@ const GaugeController = Chart.controllers.doughnut.extend({
     if (!this.chart.config.options.valueLabel.display) {
       return;
     }
-    const { ctx, chartArea: { bottom }, config } = this.chart;
+    const { ctx, config } = this.chart;
     const dataset = config.data.datasets[this.index];
     const {
       formatter,
@@ -151,8 +163,12 @@ const GaugeController = Chart.controllers.doughnut.extend({
     const w = (padding.left + textWidth + padding.right);
     const h = (padding.top + textHeight + padding.bottom);
 
-    const dx = width / 2;
-    const dy = bottom - bottomMargin;
+    // center
+    let { dx, dy } = this.getTranslation(this.chart);
+    // add rotation
+    const rotation = this.chart.options.rotation % (Math.PI * 2.0);
+    dx += bottomMargin * Math.cos(rotation + Math.PI / 2);
+    dy += bottomMargin * Math.sin(rotation + Math.PI / 2);
 
     // draw
     ctx.save();
