@@ -25,8 +25,8 @@
     "chart.js": "^2.8.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/preset-env": "^7.6.3",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
@@ -36,12 +36,12 @@
     "karma-jasmine": "^2.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
     "karma-rollup-preprocessor": "^7.0.2",
-    "rollup": "^1.25.1",
-    "rollup-plugin-babel": "^4.3.3",
+    "rollup": "^1.32.1",
+    "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-istanbul": "^2.0.1",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-terser": "^5.1.2"
+    "rollup-plugin-terser": "^5.3.0"
   },
   "scripts": {
     "build": "rollup -c",

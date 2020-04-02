@@ -223,7 +223,7 @@ const GaugeController = Chart.controllers.doughnut.extend({
     const endAngle = startAngle + (options.circumference * ((value - previousValue) / maxValue));
     const circumference = endAngle - startAngle;
 
-    Object.assign(arc._model, { startAngle, endAngle, circumference });
+    arc._model = { startAngle, endAngle, circumference, ...arc._model };
   },
   draw(ease) {
     Chart.controllers.doughnut.prototype.draw.call(this, ease);
