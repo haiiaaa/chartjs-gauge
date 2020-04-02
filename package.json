@@ -2,7 +2,7 @@
   "name": "chartjs-gauge",
   "description": "Gauge chart for chart.js",
   "homepage": "https://github.com/haiiaaa/chartjs-gauge/",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "licence": "MIT",
   "jsdelivr": "dist/chartjs-gauge.min.js",
   "unpkg": "dist/chartjs-gauge.min.js",

@@ -2,6 +2,12 @@
 
 Simple gauge chart for [Chart.js](https://www.chartjs.org/)
 
+## Samples
+
+- [Gauge Chart](https://codepen.io/haiiaaa/pen/rNVbmYy)
+- [Gauge Chart with datalabels plugin](https://codepen.io/haiiaaa/pen/KKpYmRz)
+- [Gauge Chart with datalabels plugin displaying labels](https://codepen.io/haiiaaa/pen/qBdwmyY)
+
 ## Install
 
 - **yarn** install: `yarn add chart.js chartjs-gauge`
