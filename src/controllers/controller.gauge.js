@@ -214,7 +214,6 @@ const GaugeController = Chart.controllers.doughnut.extend({
     const dataset = this.getDataset();
     const { data } = dataset;
     const { options } = this.chart.config;
-
     // scale data
     const maxValue = this.getMaxValue(data);
     const previousValue = data[index - 1] || 0;
@@ -223,7 +222,12 @@ const GaugeController = Chart.controllers.doughnut.extend({
     const endAngle = startAngle + (options.circumference * ((value - previousValue) / maxValue));
     const circumference = endAngle - startAngle;
 
-    arc._model = { startAngle, endAngle, circumference, ...arc._model };
+    arc._model = {
+      ...arc._model,
+      startAngle,
+      endAngle,
+      circumference,
+    };
   },
   draw(ease) {
     Chart.controllers.doughnut.prototype.draw.call(this, ease);
