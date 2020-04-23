@@ -19,7 +19,7 @@ module.exports = (karma) => {
 
   karma.set({
     frameworks: ['jasmine'],
-    reporters: ['progress', 'kjhtml'],
+    reporters: ['progress'],
     browsers: ['chrome', 'firefox'],
     logLevel: karma.LOG_WARN,
 

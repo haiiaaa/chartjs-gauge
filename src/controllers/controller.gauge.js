@@ -156,7 +156,7 @@ const GaugeController = Chart.controllers.doughnut.extend({
     // const textHeight = actualBoundingBoxAscent + actualBoundingBoxDescent;
     const { width: textWidth } = ctx.measureText(valueText);
     // approximate height until browsers support advanced TextMetrics
-    const textHeight = ctx.measureText('M').width;
+    const textHeight = Math.max(ctx.measureText('m').width, ctx.measureText('\uFF37').width);
 
     const x = -(padding.left + textWidth / 2);
     const y = -(padding.top + textHeight / 2);
@@ -182,7 +182,8 @@ const GaugeController = Chart.controllers.doughnut.extend({
 
     // draw value text
     ctx.fillStyle = color || config.options.defaultFontColor;
-    ctx.fillText(valueText, 0, textHeight / 2 - (padding.bottom));
+    const magicNumber = 0.075; // manual testing
+    ctx.fillText(valueText, 0, textHeight * magicNumber);
 
     ctx.restore();
   },
