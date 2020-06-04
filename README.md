@@ -30,6 +30,7 @@ The gauge chart is based on the [Doughnut](https://www.chartjs.org/docs/latest/c
 | `needle.color`            | [`Color`](https://www.chartjs.org/docs/latest/general/colors.html) | `'rgba(0, 0, 0, 1)'` | The color of the needle.
 | `valueLabel.display`         | `boolean`                                                          | `2`                        | If true, display the value label.
 | `valueLabel.formatter`       | `function`                                                         | `Math.round`               | Returns the string representation of the value as it should be displayed on the chart.
+| `valueLabel.fontSize`               | `number`                                                           | `undefined`                | The font size of the label.
 | `valueLabel.color`                  | [`Color`](https://www.chartjs.org/docs/latest/general/colors.html) | `'rgba(255, 255, 255, 1)'` | The text color of the label.
 | `valueLabel.backgroundColor`        | [`Color`](https://www.chartjs.org/docs/latest/general/colors.html) | `'rgba(0, 0, 0, 1)'`       | The background color of the label.
 | `valueLabel.borderRadius`           | `number`                                                           | `5`                        | Border radius of the label.

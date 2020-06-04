@@ -13,6 +13,7 @@ Chart.defaults._set('gauge', {
     color: 'rgba(0, 0, 0, 1)',
   },
   valueLabel: {
+    // fontSize: undefined
     display: true,
     formatter: null,
     color: 'rgba(255, 255, 255, 1)',
@@ -134,9 +135,13 @@ const GaugeController = Chart.controllers.doughnut.extend({
       return;
     }
     const { ctx, config } = this.chart;
+    const {
+      defaultFontFamily,
+    } = config.options;
     const dataset = config.data.datasets[this.index];
     const {
       formatter,
+      fontSize,
       color,
       backgroundColor,
       borderRadius,
@@ -151,9 +156,13 @@ const GaugeController = Chart.controllers.doughnut.extend({
     const valueText = fmt(dataset.value).toString();
     ctx.textBaseline = 'middle';
     ctx.textAlign = 'center';
+    if (fontSize) {
+      ctx.font = `${fontSize}px ${defaultFontFamily}`;
+    }
 
     // const { width: textWidth, actualBoundingBoxAscent, actualBoundingBoxDescent } = ctx.measureText(valueText);
     // const textHeight = actualBoundingBoxAscent + actualBoundingBoxDescent;
+
     const { width: textWidth } = ctx.measureText(valueText);
     // approximate height until browsers support advanced TextMetrics
     const textHeight = Math.max(ctx.measureText('m').width, ctx.measureText('\uFF37').width);
