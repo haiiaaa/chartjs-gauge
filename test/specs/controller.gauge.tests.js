@@ -73,4 +73,36 @@ describe('Chart.controllers.gauge', () => {
       expect(meta.data[i]._model.endAngle).toBeCloseTo(expected.e, 8, `endAngle ${i}`);
     });
   });
+
+  it('should scale values for minValue', () => {
+    const chart = window.acquireChart({
+      type: 'gauge',
+      data: {
+        datasets: [{
+          value: 0,
+          minValue: -1, // number | true
+          data: [1, 2, 3], // or [0, 2, 3, 4] with [null, 'green', 'yellow', 'red']
+        }],
+      },
+      options: {
+        rotation: -Math.PI,
+        circumference: Math.PI,
+      },
+    });
+
+    const meta = chart.getDatasetMeta(0);
+
+    expect(meta.data.length).toBe(3);
+
+    // Only startAngle, endAngle and circumference should be different.
+    [
+      { c: Math.PI / 2, s: -Math.PI, e: -Math.PI / 2 },
+      { c: Math.PI / 4, s: -Math.PI / 2, e: -Math.PI / 4 },
+      { c: Math.PI / 4, s: -Math.PI / 4, e: 0 },
+    ].forEach((expected, i) => {
+      expect(meta.data[i]._model.circumference).toBeCloseTo(expected.c, 8, `circumference ${i}`);
+      expect(meta.data[i]._model.startAngle).toBeCloseTo(expected.s, 8, `startAngle ${i}`);
+      expect(meta.data[i]._model.endAngle).toBeCloseTo(expected.e, 8, `endAngle ${i}`);
+    });
+  });
 });

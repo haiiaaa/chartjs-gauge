@@ -21,6 +21,7 @@ module.exports = (karma) => {
     frameworks: ['jasmine'],
     reporters: ['progress'],
     browsers: ['chrome', 'firefox'],
+    // browsers: ['ChromeHeadless'],
     logLevel: karma.LOG_WARN,
 
     // Explicitly disable hardware acceleration to make image

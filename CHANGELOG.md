@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.3.0] - 2021-05-05
+
+### Added
+
+- [#18](https://github.com/haiiaaa/chartjs-gauge/issues/18) Not starting at zero
+
 ## [0.2.0] - 2020-06-04
 
 ### Added
@@ -32,7 +38,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Initial version
 
-[unreleased]: https://github.com/haiiaaa/chartjs-gauge/compare/release/0.2.0...master
+[unreleased]: https://github.com/haiiaaa/chartjs-gauge/compare/release/0.3.0...master
+[0.3.0]: https://github.com/haiiaaa/chartjs-gauge/compare/release/0.2.0...release/0.3.0
 [0.2.0]: https://github.com/haiiaaa/chartjs-gauge/compare/release/0.1.2...release/0.2.0
 [0.1.2]: https://github.com/haiiaaa/chartjs-gauge/compare/release/0.1.1...release/0.1.2
 [0.1.1]: https://github.com/haiiaaa/chartjs-gauge/compare/release/0.1.0...release/0.1.1

@@ -47,9 +47,12 @@ Chart.defaults._set('gauge', {
 });
 
 const GaugeController = Chart.controllers.doughnut.extend({
-  getMaxValue(data) {
-    // assuming array is sorted
-    return data[data.length - 1] || 1;
+  getValuePercent({ minValue, data }, value) {
+    const min = minValue || 0;
+    const max = data[data.length - 1] || 1;
+    const length = max - min;
+    const percent = (value - min) / length;
+    return percent;
   },
   getWidth(chart) {
     return chart.chartArea.right - chart.chartArea.left;
@@ -62,9 +65,9 @@ const GaugeController = Chart.controllers.doughnut.extend({
     const dy = (centerY + offsetY);
     return { dx, dy };
   },
-  getAngle({ chart, value, maxValue }) {
+  getAngle({ chart, valuePercent }) {
     const { rotation, circumference } = chart.options;
-    return rotation + (circumference * (value / maxValue));
+    return rotation + (circumference * valuePercent);
   },
   /* TODO set min padding, not applied until chart.update() (also chartArea must have been set)
   setBottomPadding(chart) {
@@ -105,9 +108,9 @@ const GaugeController = Chart.controllers.doughnut.extend({
     const { dx, dy } = this.getTranslation(this.chart);
 
     // interpolate
-    const origin = this.getAngle({ chart: this.chart, value: previous.value, maxValue: previous.maxValue });
-    // TODO maxValue is in current.maxValue also
-    const target = this.getAngle({ chart: this.chart, value: dataset.value, maxValue: this.getMaxValue(dataset.data) });
+    const origin = this.getAngle({ chart: this.chart, valuePercent: previous.valuePercent });
+    // TODO valuePercent is in current.valuePercent also
+    const target = this.getAngle({ chart: this.chart, valuePercent: this.getValuePercent(dataset, dataset.value) });
     const angle = origin + (target - origin) * ease;
 
     // draw
@@ -199,10 +202,11 @@ const GaugeController = Chart.controllers.doughnut.extend({
   // overrides
   update(reset) {
     const dataset = this.chart.config.data.datasets[this.index];
+    dataset.minValue = dataset.minValue || 0;
+
     const meta = this.getMeta();
     const initialValue = {
-      value: 0,
-      maxValue: 1,
+      valuePercent: 0,
     };
     // animations on will call update(reset) before update()
     if (reset) {
@@ -212,8 +216,7 @@ const GaugeController = Chart.controllers.doughnut.extend({
       dataset.data.sort((a, b) => a - b);
       meta.previous = meta.current || initialValue;
       meta.current = {
-        value: dataset.value,
-        maxValue: this.getMaxValue(dataset.data),
+        valuePercent: this.getValuePercent(dataset, dataset.value),
       };
     }
     Chart.controllers.doughnut.prototype.update.call(this, reset);
@@ -223,13 +226,12 @@ const GaugeController = Chart.controllers.doughnut.extend({
     Chart.controllers.doughnut.prototype.updateElement.call(this, arc, index, reset);
     const dataset = this.getDataset();
     const { data } = dataset;
-    const { options } = this.chart.config;
+    // const { options } = this.chart.config;
     // scale data
-    const maxValue = this.getMaxValue(data);
-    const previousValue = data[index - 1] || 0;
+    const previousValue = index === 0 ? dataset.minValue : data[index - 1];
     const value = data[index];
-    const startAngle = options.rotation + (options.circumference * (previousValue / maxValue));
-    const endAngle = startAngle + (options.circumference * ((value - previousValue) / maxValue));
+    const startAngle = this.getAngle({ chart: this.chart, valuePercent: this.getValuePercent(dataset, previousValue) });
+    const endAngle = this.getAngle({ chart: this.chart, valuePercent: this.getValuePercent(dataset, value) });
     const circumference = endAngle - startAngle;
 
     arc._model = {

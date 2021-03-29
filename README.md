@@ -24,12 +24,12 @@ The gauge chart is based on the [Doughnut](https://www.chartjs.org/docs/latest/c
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| `needle.radiusPercentage` | `number`                                                           | `2`                  | Needle circle radius as the percentage of the chart area width.
-| `needle.widthPercentage`  | `number`                                                           | `3.2`                | Needle width as the percentage of the chart area width.
-| `needle.lengthPercentage` | `number`                                                           | `80`                 | Needle length as the percentage of the interval between inner radius (0%) and outer radius (100%) of the arc.
-| `needle.color`            | [`Color`](https://www.chartjs.org/docs/latest/general/colors.html) | `'rgba(0, 0, 0, 1)'` | The color of the needle.
-| `valueLabel.display`         | `boolean`                                                          | `2`                        | If true, display the value label.
-| `valueLabel.formatter`       | `function`                                                         | `Math.round`               | Returns the string representation of the value as it should be displayed on the chart.
+| `needle.radiusPercentage`           | `number`                                                           | `2`                        | Needle circle radius as the percentage of the chart area width.
+| `needle.widthPercentage`            | `number`                                                           | `3.2`                      | Needle width as the percentage of the chart area width.
+| `needle.lengthPercentage`           | `number`                                                           | `80`                       | Needle length as the percentage of the interval between inner radius (0%) and outer radius (100%) of the arc.
+| `needle.color`                      | [`Color`](https://www.chartjs.org/docs/latest/general/colors.html) | `'rgba(0, 0, 0, 1)'`       | The color of the needle.
+| `valueLabel.display`                | `boolean`                                                          | `true`                     | If true, display the value label.
+| `valueLabel.formatter`              | `function`                                                         | `Math.round`               | Returns the string representation of the value as it should be displayed on the chart.
 | `valueLabel.fontSize`               | `number`                                                           | `undefined`                | The font size of the label.
 | `valueLabel.color`                  | [`Color`](https://www.chartjs.org/docs/latest/general/colors.html) | `'rgba(255, 255, 255, 1)'` | The text color of the label.
 | `valueLabel.backgroundColor`        | [`Color`](https://www.chartjs.org/docs/latest/general/colors.html) | `'rgba(0, 0, 0, 1)'`       | The background color of the label.
@@ -52,11 +52,12 @@ Chart.defaults.gauge.needle.radiusPercentage = 5;
 
 ## Dataset Properties
 
-The gauge chart requires a value to be specified for the dataset. This is used to draw the neeedle for the dataset.
+The gauge chart requires a value to be specified for the dataset. This is used to draw the needle for the dataset.
 
-| Name | Type | Default
-| ---- | ---- | ----
-| `value` | `number` | `undefined`
+| Name       | Type     | Default     | Description
+| ---------- | -------- | ----------- | -----------
+| `value`    | `number` | `undefined` | Value used for the needle.
+| `minValue` | `number` | `0`         | Used to offset the start value.
 
 
 ## Example
@@ -69,6 +70,7 @@ var chart = new Chart(ctx, {
   data: {
     datasets: [{
       value: 0.5,
+      minValue: 0,
       data: [1, 2, 3, 4],
       backgroundColor: ['green', 'yellow', 'orange', 'red'],
     }]
