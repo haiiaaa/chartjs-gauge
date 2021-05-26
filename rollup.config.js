@@ -1,14 +1,25 @@
 const babel = require('rollup-plugin-babel');
 const { terser } = require('rollup-plugin-terser');
+const json = require('@rollup/plugin-json');
 const pkg = require('./package.json');
 
-const input = 'src/index.js';
 const banner = `/*!
  * chartjs-gauge.js v${pkg.version}
  * ${pkg.homepage}
  * (c) ${new Date().getFullYear()} chartjs-gauge.js Contributors
  * Released under the MIT License
  */`;
+
+const input = 'src/index.js';
+const inputESM = 'src/index.esm.js';
+const external = [
+  'chart.js',
+  'chart.js/helpers'
+];
+const globals = {
+  'chart.js': 'Chart',
+  'chart.js/helpers': 'Chart.helpers'
+};
 
 module.exports = [
   // UMD builds (excluding Chart)
@@ -20,6 +31,7 @@ module.exports = [
       babel({
         exclude: 'node_modules/**',
       }),
+      json(),
     ],
     output: {
       name: 'Gauge',
@@ -27,13 +39,9 @@ module.exports = [
       banner,
       format: 'umd',
       indent: false,
-      globals: {
-        'chart.js': 'Chart',
-      },
+      globals
     },
-    external: [
-      'chart.js',
-    ],
+    external
   },
   {
     input,
@@ -46,18 +54,15 @@ module.exports = [
           preamble: banner,
         },
       }),
+      json(),
     ],
     output: {
       name: 'Gauge',
       file: 'dist/chartjs-gauge.min.js',
       format: 'umd',
       indent: false,
-      globals: {
-        'chart.js': 'Chart',
-      },
+      globals
     },
-    external: [
-      'chart.js',
-    ],
+    external
   },
 ];
