@@ -32,7 +32,7 @@ function getRatioAndOffset( rotation, circumference, cutout, needleOpts ) {
       widthPercentage,
       lengthPercentage,
     } = needleOpts;
-    const needleWidth = Math.max( radiusPercentage / 100, widthPercentage / 100 );
+    const needleWidth = Math.max( radiusPercentage / 100, widthPercentage / 2 / 100 );
     const calcMax = ( angle, a, b ) => _angleBetween( angle, startAngle, endAngle ) ? Math.max(  1,  lengthPercentage / 100 ) : Math.max( a, a * cutout, b, b * cutout,  needleWidth );
     const calcMin = ( angle, a, b ) => _angleBetween( angle, startAngle, endAngle ) ? Math.min( -1, -lengthPercentage / 100 ) : Math.min( a, a * cutout, b, b * cutout, -needleWidth );
     const maxX = calcMax( 0, startX, endX );
@@ -358,11 +358,9 @@ GaugeController.overrides = {
   // The percentage of the chart that we cut out of the middle.
   cutout: '50%',
   // The rotation of the chart, where the first data arc begins.
-//  rotation: -90,
-  rotation: -70,
+  rotation: -90,
   // The total circumference of the chart.
-//  circumference: 180,
-  circumference: 140,
+  circumference: 180,
   plugins: {
     legend: {
       display: false,
