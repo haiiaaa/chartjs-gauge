@@ -49,7 +49,7 @@ Chart.defaults._set('gauge', {
 const GaugeController = Chart.controllers.doughnut.extend({
   getValuePercent({ minValue, data }, value) {
     const min = minValue || 0;
-    const max = data[data.length - 1] || 1;
+    const max = [undefined, null].includes(data[data.length - 1]) ? 1 : data[data.length - 1];
     const length = max - min;
     const percent = (value - min) / length;
     return percent;
